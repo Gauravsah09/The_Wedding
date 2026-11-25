@@ -140,26 +140,29 @@ node scripts/verify-views.mjs
 
 The output directory is `dist`. This static single-page application requires no backend server.
 
-### 1. Netlify
-- **Build command**: `npm run build`
-- **Publish directory**: `dist`
-- **Netlify CLI**:
-  ```bash
-  npm run build
-  npx netlify-cli deploy --prod --dir=dist
-  ```
+### 1. Render (Recommended)
+This repository includes a production-ready [`render.yaml`](render.yaml) specification with automated Single-Page Application routing, audio streaming headers, and asset caching.
 
-### 2. Vercel
-- **Framework Preset**: Vite
-- **Build command**: `npm run build`
-- **Output directory**: `dist`
-- **Vercel CLI**:
-  ```bash
-  npm run build
-  npx vercel --prod
-  ```
+#### Method A: Render Blueprint (One-Click)
+1. Push this repository to GitHub or GitLab.
+2. In the [Render Dashboard](https://dashboard.render.com), click **New +** > **Blueprint**.
+3. Select your repository. Render automatically reads `render.yaml` and provisions your free static site.
 
-### 4. Docker Deployment
+#### Method B: Manual Static Site on Render
+1. In the [Render Dashboard](https://dashboard.render.com), click **New +** > **Static Site**.
+2. Connect your Git repository.
+3. Configure settings:
+   - **Build Command**: `npm install && npm run build`
+   - **Publish Directory**: `dist`
+4. Under **Redirects/Rewrites**:
+   - **Type**: `Rewrite`
+   - **Source**: `/*`
+   - **Destination**: `/index.html`
+5. Click **Create Static Site**.
+
+---
+
+### 2. Docker Deployment
 A multi-stage production `Dockerfile` with optimized Alpine Nginx and custom `nginx.conf` (gzip, HTTP byte-range audio streaming, client route fallback) is included.
 
 #### Using Docker Compose (Recommended)
