@@ -1,0 +1,10 @@
+services:
+  wedding-invitation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wedding-invitation
+    image: wedding-invitation:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped
