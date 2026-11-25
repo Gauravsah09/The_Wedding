@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: wedding-invitation
+    name: ritu-weds-gaurav
     runtime: static
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
